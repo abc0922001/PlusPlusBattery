@@ -5,10 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -17,11 +13,14 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dijia1124.plusplusbattery.data.model.BatteryInfo
 import com.dijia1124.plusplusbattery.ui.screen.NormalBatteryCard
+import com.dijia1124.plusplusbattery.R
 
 data class PowerDataPoint(
     val timestamp: Long,
@@ -47,14 +46,14 @@ fun CardWithPowerChart(
             if (isExpanded) {
                 IconButton(onClick = onResetData, modifier = Modifier.size(36.dp)) {
                     Icon(
-                        imageVector = Icons.Filled.Refresh,
+                        imageVector = ImageVector.vectorResource(id = R.drawable.refresh_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
                         contentDescription = "Reset Chart Data"
                     )
                 }
             }
             IconButton(onClick = onChartExpand, modifier = Modifier.size(36.dp)) {
                 Icon(
-                    imageVector = if (isExpanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                    imageVector = if (isExpanded) ImageVector.vectorResource(id = R.drawable.keyboard_arrow_up_24dp_1f1f1f_fill1_wght400_grad0_opsz24) else ImageVector.vectorResource(id = R.drawable.keyboard_arrow_down_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
                     contentDescription = if (isExpanded) "Collapse" else "Expand"
                 )
             }

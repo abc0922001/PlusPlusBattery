@@ -11,9 +11,6 @@ import androidx.compose.ui.Modifier
 import com.dijia1124.plusplusbattery.ui.theme.PlusPlusBatteryTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -210,7 +207,9 @@ class MainActivity : ComponentActivity() {
 fun BottomNavigationBar(navController: NavController) {
     // Define the list of navigation routes using the data class
     val navRoutes = listOf(
-        NavRoute("dashboard", Icons.Filled.Home, stringResource(R.string.nav_dashboard)),
+        NavRoute("dashboard",
+            ImageVector.vectorResource(id = R.drawable.home_24dp_1f1f1f_fill1_wght400_grad0_opsz24)
+            , stringResource(R.string.nav_dashboard)),
         NavRoute(
             "battery_monitor",
             ImageVector.vectorResource(id = R.drawable.speed_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
@@ -221,7 +220,9 @@ fun BottomNavigationBar(navController: NavController) {
             ImageVector.vectorResource(id = R.drawable.library_books_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
             stringResource(R.string.nav_history)
         ),
-        NavRoute("settings", Icons.Filled.Settings, stringResource(R.string.settings)),
+        NavRoute("settings",
+            ImageVector.vectorResource(id = R.drawable.settings_24dp_1f1f1f_fill1_wght400_grad0_opsz24)
+            , stringResource(R.string.settings)),
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
