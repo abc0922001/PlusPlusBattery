@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -359,7 +360,7 @@ fun DashBoardContent(hasRoot: Boolean, batteryInfoViewModel: BatteryInfoViewMode
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+        Box(modifier = Modifier.padding(horizontal = 8.dp)) {
             LazyColumn (
                 state = listState,
                 modifier = Modifier.fillMaxWidth()
@@ -378,7 +379,7 @@ fun DashBoardContent(hasRoot: Boolean, batteryInfoViewModel: BatteryInfoViewMode
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(9.dp),
+                                .padding(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             when (batteryInfoList[index].type) {
