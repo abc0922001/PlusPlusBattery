@@ -132,7 +132,7 @@ fun History(historyInfoViewModel: HistoryInfoViewModel, currentTitle: String) {
 @Composable
 fun HistoryInfoScreen(historyInfoViewModel: HistoryInfoViewModel) {
     val historyInfos by historyInfoViewModel.allHistoryInfos.collectAsState(emptyList())
-    Column (modifier = Modifier.padding(horizontal = 16.dp)){
+    Column (modifier = Modifier.padding(horizontal = 8.dp)){
         LazyColumn {
             items(historyInfos.size) { index ->
 
@@ -148,7 +148,7 @@ fun HistoryInfoScreen(historyInfoViewModel: HistoryInfoViewModel) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(9.dp),
+                            .padding(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         val date = Date(historyInfos[historyInfos.size - index -1].date)
