@@ -142,7 +142,7 @@ fun HistoryInfoScreen(historyInfoViewModel: HistoryInfoViewModel) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 1.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     shape = cardShape
                 ) {
                     Row(
