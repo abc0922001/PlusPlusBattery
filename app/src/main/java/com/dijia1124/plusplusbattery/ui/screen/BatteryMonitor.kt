@@ -11,7 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,18 +23,20 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavController
-import com.dijia1124.plusplusbattery.ui.components.AppScaffold
-import androidx.compose.runtime.getValue
-import com.dijia1124.plusplusbattery.vm.BatteryMonitorSettingsViewModel
-import com.dijia1124.plusplusbattery.R
 import androidx.core.net.toUri
+import androidx.navigation.NavController
+import com.dijia1124.plusplusbattery.R
+import com.dijia1124.plusplusbattery.ui.components.AppScaffold
+import com.dijia1124.plusplusbattery.ui.components.CardGroup
+import com.dijia1124.plusplusbattery.ui.components.CardGroupTitle
+import com.dijia1124.plusplusbattery.vm.BatteryMonitorSettingsViewModel
 
 @Composable
 fun BatteryMonitor(currentTitle: String, navController: NavController, battMonVM: BatteryMonitorSettingsViewModel) {
@@ -51,27 +55,60 @@ fun BatteryMonitorContent(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp)
+            .padding(horizontal = 8.dp)
             .verticalScroll(scrollState)
     ) {
-        ListItem(
-            modifier = Modifier.clickable { navController.navigate("batt_mon_settings") },
-            headlineContent = { Text(text = stringResource(R.string.battery_monitor_entry_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) }
+        CardGroup(
+            title = { CardGroupTitle(text = stringResource(R.string.general)) },
+            content = listOf(
+                {
+                    ListItem(
+                        modifier = Modifier.clickable { navController.navigate("batt_mon_settings") },
+                        headlineContent = { Text(text = stringResource(R.string.battery_monitor_entry_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) }
+                    )
+                }
+            )
         )
-        ListItem(
-            modifier = Modifier.clickable { navController.navigate("floating_window_settings") },
-            headlineContent = { Text(text = stringResource(R.string.floating_window_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) }
+        Spacer(Modifier.height(20.dp))
+        CardGroup(
+            title = { CardGroupTitle(text = stringResource(R.string.notification)) },
+            content = listOf(
+                {
+                    ListItem(
+                        headlineContent = { BatteryMonitorSwitch(battMonVM) }
+                    )
+                }
+            )
         )
-        ListItem(
-            headlineContent = {BatteryMonitorSwitch(battMonVM)}
+        Spacer(Modifier.height(20.dp))
+        CardGroup(
+            title = { CardGroupTitle(text = stringResource(R.string.floating_window)) },
+            content = listOf(
+                {
+                    ListItem(
+                        modifier = Modifier.clickable { navController.navigate("floating_window_settings") },
+                        headlineContent = { Text(text = stringResource(R.string.floating_window_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) }
+                    )
+                },
+                {
+                    ListItem(
+                        headlineContent = { FloatingWindowSwitch(battMonVM) }
+                    )
+                }
+            )
         )
-        ListItem(
-            headlineContent = {FloatingWindowSwitch(battMonVM)}
-        )
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(R.string.disable_battery_optimization), style = MaterialTheme.typography.bodySmall)
-            }
+        Spacer(Modifier.height(20.dp))
+        CardGroup(
+            title = { CardGroupTitle(text = stringResource(R.string.tips)) },
+            content = listOf(
+                {
+                    ListItem(
+                        headlineContent = {
+                            Text(text = stringResource(R.string.disable_battery_optimization), style = MaterialTheme.typography.bodySmall)
+                        }
+                    )
+                }
+            )
         )
     }
 }

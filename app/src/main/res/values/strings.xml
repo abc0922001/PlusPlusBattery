@@ -155,4 +155,8 @@
     <string name="export_history">Export History</string>
     <string name="export_history_confirmation">Export all history records to a CSV file? \nEarliest: %1$s\nLatest: %2$s</string>
     <string name="export">Export</string>
+    <string name="general">General</string>
+    <string name="notification">Notification</string>
+    <string name="floating_window">Floating Window</string>
+    <string name="tips">Tips</string>
 </resources>

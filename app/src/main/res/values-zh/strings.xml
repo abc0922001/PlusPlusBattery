@@ -154,4 +154,8 @@
     <string name="export_history">导出历史信息</string>
     <string name="export_history_confirmation">导出所有历史信息到一个 csv 文件？ \n最早: %1$s\n最新: %2$s</string>
     <string name="export">Export</string>
+    <string name="general">通用</string>
+    <string name="notification">通知</string>
+    <string name="floating_window">悬浮窗</string>
+    <string name="tips">提示</string>
 </resources>
