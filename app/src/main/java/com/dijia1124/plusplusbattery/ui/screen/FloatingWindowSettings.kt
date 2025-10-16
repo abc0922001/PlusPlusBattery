@@ -105,47 +105,6 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                 )
             }
         )
-        ListItem(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            headlineContent = { Text(text = stringResource(R.string.font_weight, fontWeight)) },
-            supportingContent = {
-                Slider(
-                    value = fontWeight.toFloat(),
-                    onValueChange = { newFontWeight ->
-                        floatingWindowSettingsViewModel.setFloatingWindowFontWeight(newFontWeight.toInt())
-                    },
-                    valueRange = 100f..900f,
-                    steps = 7
-                )
-            }
-        )
-        Text(
-            text = stringResource(R.string.text_color),
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(start = 26.dp, top = 16.dp, end = 26.dp, bottom = 8.dp)
-        )
-        LazyRow(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 26.dp)
-        ) {
-            items(textColorOptions.toList()) { (key, name) ->
-                val isSelected = key == textColorKey
-                OutlinedCard(
-                    onClick = { floatingWindowSettingsViewModel.setFloatingWindowTextColor(key) },
-                    border = if (isSelected) BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else CardDefaults.outlinedCardBorder(),
-                    colors = if (isSelected) CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer) else CardDefaults.outlinedCardColors(),
-                ) {
-                    Text(
-                        text = name,
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
-                    )
-                }
-            }
-        }
         Text(
             text = stringResource(R.string.background_color),
             style = MaterialTheme.typography.bodyLarge,
@@ -173,6 +132,47 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                 }
             }
         }
+        Text(
+            text = stringResource(R.string.text_color),
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(start = 26.dp, top = 16.dp, end = 26.dp, bottom = 8.dp)
+        )
+        LazyRow(
+            modifier = Modifier
+                .padding(vertical = 8.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(horizontal = 26.dp)
+        ) {
+            items(textColorOptions.toList()) { (key, name) ->
+                val isSelected = key == textColorKey
+                OutlinedCard(
+                    onClick = { floatingWindowSettingsViewModel.setFloatingWindowTextColor(key) },
+                    border = if (isSelected) BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else CardDefaults.outlinedCardBorder(),
+                    colors = if (isSelected) CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer) else CardDefaults.outlinedCardColors(),
+                ) {
+                    Text(
+                        text = name,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+        }
+        ListItem(
+            modifier = Modifier.padding(horizontal = 10.dp),
+            headlineContent = { Text(text = stringResource(R.string.font_weight, fontWeight)) },
+            supportingContent = {
+                Slider(
+                    value = fontWeight.toFloat(),
+                    onValueChange = { newFontWeight ->
+                        floatingWindowSettingsViewModel.setFloatingWindowFontWeight(newFontWeight.toInt())
+                    },
+                    valueRange = 100f..900f,
+                    steps = 7
+                )
+            }
+        )
         ListItem(
             modifier = Modifier.padding(horizontal = 10.dp),
             headlineContent = { Text(text = stringResource(R.string.text_stroke)) },
