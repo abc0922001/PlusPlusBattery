@@ -69,7 +69,7 @@ fun BatteryMonitorContent(
                 }
             )
         )
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(16.dp))
         CardGroup(
             title = { CardGroupTitle(text = stringResource(R.string.notification)) },
             content = listOf(
@@ -80,7 +80,7 @@ fun BatteryMonitorContent(
                 }
             )
         )
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(16.dp))
         CardGroup(
             title = { CardGroupTitle(text = stringResource(R.string.floating_window)) },
             content = listOf(
@@ -97,7 +97,7 @@ fun BatteryMonitorContent(
                 }
             )
         )
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(16.dp))
         CardGroup(
             title = { CardGroupTitle(text = stringResource(R.string.tips)) },
             content = listOf(
