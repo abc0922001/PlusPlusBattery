@@ -34,6 +34,8 @@ import com.dijia1124.plusplusbattery.R
 import com.dijia1124.plusplusbattery.vm.SettingsViewModel
 import com.dijia1124.plusplusbattery.ui.components.AppScaffold
 import androidx.core.net.toUri
+import com.dijia1124.plusplusbattery.ui.components.CardGroup
+import com.dijia1124.plusplusbattery.ui.components.CardGroupTitle
 import com.dijia1124.plusplusbattery.ui.components.showRootDeniedToast
 import kotlin.math.roundToInt
 
@@ -65,89 +67,173 @@ fun SettingsContent(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp)
+            .padding(horizontal = 8.dp)
             .verticalScroll(scrollState)
     ) {
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(R.string.follow_system_theme), style = MaterialTheme.typography.bodyLarge)
-            },
-            trailingContent = {
-                Switch(
-                    checked = followSystemTheme,
-                    onCheckedChange = { settingsVM.setFollowSystem(it) }
-                )
-            }
+        // UI
+        CardGroup(
+            title = { CardGroupTitle(text = context.getString(R.string.ui)) },
+            content = listOf(
+                {
+                    ListItem(
+                        headlineContent = {
+                            Text(
+                                text = stringResource(R.string.follow_system_theme),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        },
+                        trailingContent = {
+                            Switch(
+                                checked = followSystemTheme,
+                                onCheckedChange = { settingsVM.setFollowSystem(it) }
+                            )
+                        }
+                    )
+                },
+                {
+                    ListItem(
+                        headlineContent = {
+                            Text(
+                                text = stringResource(R.string.enable_dark_mode),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        },
+                        trailingContent = {
+                            Switch(
+                                checked = darkModeEnabled,
+                                onCheckedChange = { settingsVM.setDarkMode(it) },
+                                enabled = !followSystemTheme
+                            )
+                        }
+                    )
+                },
+                {
+                    ListItem(
+                        headlineContent = { Text(text = stringResource(R.string.show_fab_on_dashboard), style = MaterialTheme.typography.bodyLarge) },
+                        trailingContent = {
+                            Switch(
+                                checked = showOnDash,
+                                onCheckedChange = { batteryVM.setShowSwitchOnDashboard(it) }
+                            )
+                        }
+                    )
+                }
+            )
         )
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(R.string.enable_dark_mode), style = MaterialTheme.typography.bodyLarge)
-            },
-            trailingContent = {
-                Switch(
-                    checked = darkModeEnabled,
-                    onCheckedChange = { settingsVM.setDarkMode(it) },
-                    enabled = !followSystemTheme
-                )
-            }
+        Spacer(Modifier.height(16.dp))
+        CardGroup(
+            title = { CardGroupTitle(text = stringResource(R.string.history)) },
+            content = listOf(
+                {
+                    ListItem(
+                        headlineContent = {
+                            Text(text = stringResource(R.string.automatic_daily_charge_cycle_log), style = MaterialTheme.typography.bodyLarge)
+                        },
+                        trailingContent = {
+                            Switch(
+                                checked = dailyHistoryEnabled,
+                                onCheckedChange = { settingsVM.setDailyHistoryEnabled(it, context) }
+                            )
+                        }
+                    )
+                }
+            )
         )
-        ListItem(
-            headlineContent = { Text(text = stringResource(R.string.show_fab_on_dashboard), style = MaterialTheme.typography.bodyLarge) },
-            trailingContent = {
-                Switch(
-                    checked = showOnDash,
-                    onCheckedChange = { batteryVM.setShowSwitchOnDashboard(it) }
-                )
-            }
+        Spacer(Modifier.height(16.dp))
+        CardGroup(
+            title = { CardGroupTitle(text = context.getString(R.string.root)) },
+            content = listOf(
+                {
+                    ListItem(
+                        headlineContent = { Text(text = stringResource(R.string.enable_root_mode), style = MaterialTheme.typography.bodyLarge) },
+                        trailingContent = {
+                            Switch(
+                                checked = isRootMode,
+                                onCheckedChange = { desired ->
+                                    if (desired) {
+                                        if (hasRoot) batteryVM.setRootMode(true)
+                                        else Toast.makeText(
+                                            context,
+                                            context.getString(R.string.root_access_denied),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else batteryVM.setRootMode(false)
+                                }
+                            )
+                        }
+                    )
+                },
+                {
+                    ListItem(
+                        headlineContent = {
+                            Text(text = stringResource(R.string.enable_oplus_fields), style = MaterialTheme.typography.bodyLarge)
+                        },
+                        trailingContent = {
+                            Switch(
+                                checked = showOplusFields,
+                                onCheckedChange = { settingsVM.setShowOplusFields(it) }
+                            )
+                        }
+                    )
+                },
+                {
+                    ListItem(
+                        modifier = Modifier.clickable { showMgr = true },
+                        headlineContent = {
+                            Text(
+                                text = stringResource(R.string.manage_custom_entries),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+                    )
+                },
+                {
+                    RefreshIntervalListItem(
+                        refreshInterval = refreshInterval,
+                        onIntervalChange = { newRate ->
+                            settingsVM.setRefreshInterval(newRate)
+                        }
+                    )
+                },
+                {
+                    ListItem(
+                        modifier = Modifier.clickable {
+                            if (isRootMode) {
+                                navController.navigate("battery_logcat_experiment")
+                            }
+                            else context.showRootDeniedToast()},
+                        headlineContent = { Text(text = stringResource(R.string.get_from_logcat), style = MaterialTheme.typography.bodyLarge) }
+                    )
+                }
+            )
         )
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(R.string.automatic_daily_charge_cycle_log), style = MaterialTheme.typography.bodyLarge)
-            },
-            trailingContent = {
-                Switch(
-                    checked = dailyHistoryEnabled,
-                    onCheckedChange = { settingsVM.setDailyHistoryEnabled(it, context) }
-                )
-            }
-        )
-        ListItem(
-            headlineContent = { Text(text = stringResource(R.string.enable_root_mode), style = MaterialTheme.typography.bodyLarge) },
-            trailingContent = {
-                Switch(
-                    checked = isRootMode,
-                    onCheckedChange = { desired ->
-                        if (desired) {
-                            if (hasRoot) batteryVM.setRootMode(true)
-                            else Toast.makeText(
-                                context,
-                                context.getString(R.string.root_access_denied),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else batteryVM.setRootMode(false)
-                    }
-                )
-            }
-        )
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(R.string.enable_oplus_fields), style = MaterialTheme.typography.bodyLarge)
-            },
-            trailingContent = {
-                Switch(
-                    checked = showOplusFields,
-                    onCheckedChange = { settingsVM.setShowOplusFields(it) }
-                )
-            }
-        )
-        ListItem(
-            modifier = Modifier.clickable { showMgr = true },
-            headlineContent = {
-                Text(
-                    text = stringResource(R.string.manage_custom_entries),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
+        Spacer(Modifier.height(16.dp))
+        CardGroup(
+            title = { CardGroupTitle(text = context.getString(R.string.other)) },
+            content = listOf(
+                {
+                    ListItem(
+                        modifier = Modifier.clickable {
+                            val intent = Intent(Intent.ACTION_VIEW).apply {
+                                data = "https://github.com/dijia1124/PlusPlusBattery/releases".toUri()
+                            }
+                            context.startActivity(intent)
+                        },
+                        headlineContent = {
+                            Text(
+                                text = stringResource(R.string.check_for_updates),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+                    )
+                },
+                {
+                    ListItem(
+                        modifier = Modifier.clickable { navController.navigate("about") },
+                        headlineContent = { Text(text = stringResource(R.string.about), style = MaterialTheme.typography.bodyLarge) }
+                    )
+                }
+            )
         )
         if (showMgr) {
             if (isRootMode) {
@@ -161,38 +247,6 @@ fun SettingsContent(
                 showMgr = false
             }
         }
-        RefreshIntervalListItem(
-            refreshInterval = refreshInterval,
-            onIntervalChange = { newRate ->
-                settingsVM.setRefreshInterval(newRate)
-            }
-        )
-        ListItem(
-            modifier = Modifier.clickable {
-                if (isRootMode) {
-                    navController.navigate("battery_logcat_experiment")
-                }
-                else context.showRootDeniedToast()},
-            headlineContent = { Text(text = stringResource(R.string.get_from_logcat), style = MaterialTheme.typography.bodyLarge) }
-        )
-        ListItem(
-            modifier = Modifier.clickable {
-                val intent = Intent(Intent.ACTION_VIEW).apply {
-                    data = "https://github.com/dijia1124/PlusPlusBattery/releases".toUri()
-                }
-                context.startActivity(intent)
-            },
-            headlineContent = {
-                Text(
-                    text = stringResource(R.string.check_for_updates),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-        )
-        ListItem(
-            modifier = Modifier.clickable { navController.navigate("about") },
-            headlineContent = { Text(text = stringResource(R.string.about), style = MaterialTheme.typography.bodyLarge) }
-        )
     }
 }
 

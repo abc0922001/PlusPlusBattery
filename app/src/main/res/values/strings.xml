@@ -159,4 +159,7 @@
     <string name="notification">Notification</string>
     <string name="floating_window">Floating Window</string>
     <string name="tips">Tips</string>
+    <string name="ui">UI</string>
+    <string name="root">Root</string>
+    <string name="other">Other</string>
 </resources>

@@ -158,4 +158,7 @@
     <string name="notification">通知</string>
     <string name="floating_window">悬浮窗</string>
     <string name="tips">提示</string>
+    <string name="ui">用户界面</string>
+    <string name="root">Root</string>
+    <string name="other">其他</string>
 </resources>
