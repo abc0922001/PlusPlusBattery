@@ -123,7 +123,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         )
                         LazyRow(
                             modifier = Modifier
-                                .padding(vertical = 8.dp)
+                                .padding(bottom = 16.dp)
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             contentPadding = PaddingValues(horizontal = 16.dp)
@@ -160,7 +160,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         )
                         LazyRow(
                             modifier = Modifier
-                                .padding(vertical = 8.dp)
+                                .padding(bottom = 16.dp)
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             contentPadding = PaddingValues(horizontal = 16.dp)
