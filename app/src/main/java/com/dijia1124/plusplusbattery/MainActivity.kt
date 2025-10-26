@@ -12,6 +12,7 @@ import com.dijia1124.plusplusbattery.ui.theme.PlusPlusBatteryTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -129,6 +130,7 @@ class MainActivity : ComponentActivity() {
                 val currentRoute = navBackStackEntry?.destination?.route
                 val hasRoot by settingsViewModel.hasRoot.collectAsState()
                 Scaffold(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
                     // Only show the top bar when on a top-level screen
                     bottomBar = {
                         if (currentRoute in topLevelRoutes) {
