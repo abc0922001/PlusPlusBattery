@@ -162,4 +162,6 @@
     <string name="ui">UI</string>
     <string name="root">Root</string>
     <string name="other">Other</string>
+    <string name="text">Text</string>
+    <string name="interaction">Interaction</string>
 </resources>

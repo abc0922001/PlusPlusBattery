@@ -161,4 +161,6 @@
     <string name="ui">用户界面</string>
     <string name="root">Root</string>
     <string name="other">其他</string>
+    <string name="text">文本</string>
+    <string name="interaction">交互</string>
 </resources>
