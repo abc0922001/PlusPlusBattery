@@ -12,6 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
@@ -27,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.dijia1124.plusplusbattery.vm.BatteryInfoViewModel
@@ -82,6 +84,12 @@ fun SettingsContent(
                                 style = MaterialTheme.typography.bodyLarge
                             )
                         },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.palette_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
                         trailingContent = {
                             CustomSwitch(
                                 checked = followSystemTheme,
@@ -98,6 +106,12 @@ fun SettingsContent(
                                 style = MaterialTheme.typography.bodyLarge
                             )
                         },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.dark_mode_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
                         trailingContent = {
                             CustomSwitch(
                                 checked = darkModeEnabled,
@@ -110,6 +124,12 @@ fun SettingsContent(
                 {
                     ListItem(
                         headlineContent = { Text(text = stringResource(R.string.show_fab_on_dashboard), style = MaterialTheme.typography.bodyLarge) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.picture_in_picture_alt_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
                         trailingContent = {
                             CustomSwitch(
                                 checked = showOnDash,
@@ -129,6 +149,12 @@ fun SettingsContent(
                         headlineContent = {
                             Text(text = stringResource(R.string.automatic_daily_charge_cycle_log), style = MaterialTheme.typography.bodyLarge)
                         },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.library_books_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
                         trailingContent = {
                             CustomSwitch(
                                 checked = dailyHistoryEnabled,
@@ -146,6 +172,12 @@ fun SettingsContent(
                 {
                     ListItem(
                         headlineContent = { Text(text = stringResource(R.string.enable_root_mode), style = MaterialTheme.typography.bodyLarge) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.numbers_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
                         trailingContent = {
                             CustomSwitch(
                                 checked = isRootMode,
@@ -168,6 +200,12 @@ fun SettingsContent(
                         headlineContent = {
                             Text(text = stringResource(R.string.enable_oplus_fields), style = MaterialTheme.typography.bodyLarge)
                         },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.looks_one_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
                         trailingContent = {
                             CustomSwitch(
                                 checked = showOplusFields,
@@ -183,6 +221,12 @@ fun SettingsContent(
                             Text(
                                 text = stringResource(R.string.manage_custom_entries),
                                 style = MaterialTheme.typography.bodyLarge
+                            )
+                        },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.battery_profile_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
                             )
                         }
                     )
@@ -202,7 +246,13 @@ fun SettingsContent(
                                 navController.navigate("battery_logcat_experiment")
                             }
                             else context.showRootDeniedToast()},
-                        headlineContent = { Text(text = stringResource(R.string.get_from_logcat), style = MaterialTheme.typography.bodyLarge) }
+                        headlineContent = { Text(text = stringResource(R.string.get_from_logcat), style = MaterialTheme.typography.bodyLarge) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.science_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        }
                     )
                 }
             )
@@ -224,13 +274,25 @@ fun SettingsContent(
                                 text = stringResource(R.string.check_for_updates),
                                 style = MaterialTheme.typography.bodyLarge
                             )
+                        },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.update_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
                         }
                     )
                 },
                 {
                     ListItem(
                         modifier = Modifier.clickable { navController.navigate("about") },
-                        headlineContent = { Text(text = stringResource(R.string.about), style = MaterialTheme.typography.bodyLarge) }
+                        headlineContent = { Text(text = stringResource(R.string.about), style = MaterialTheme.typography.bodyLarge) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.info_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        }
                     )
                 }
             )
@@ -274,6 +336,12 @@ fun RefreshIntervalListItem(
             Text(
                 text = stringResource(R.string.set_refresh_interval_ms),
                 style = MaterialTheme.typography.bodyLarge
+            )
+        },
+        leadingContent = {
+            Icon(
+                painter = painterResource(id = R.drawable.hourglass_bottom_24dp_000000_fill0_wght400_grad0_opsz24),
+                contentDescription = null,
             )
         },
         supportingContent = {
