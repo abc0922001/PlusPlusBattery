@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import com.dijia1124.plusplusbattery.ui.components.CustomSwitch
@@ -27,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -64,7 +66,13 @@ fun BatteryMonitorContent(
                 {
                     ListItem(
                         modifier = Modifier.clickable { navController.navigate("batt_mon_settings") },
-                        headlineContent = { Text(text = stringResource(R.string.battery_monitor_entry_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) }
+                        headlineContent = { Text(text = stringResource(R.string.battery_monitor_entry_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.battery_profile_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        }
                     )
                 }
             )
@@ -75,7 +83,13 @@ fun BatteryMonitorContent(
             content = listOf(
                 {
                     ListItem(
-                        headlineContent = { BatteryMonitorSwitch(battMonVM) }
+                        headlineContent = { BatteryMonitorSwitch(battMonVM) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.notifications_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        }
                     )
                 }
             )
@@ -87,12 +101,24 @@ fun BatteryMonitorContent(
                 {
                     ListItem(
                         modifier = Modifier.clickable { navController.navigate("floating_window_settings") },
-                        headlineContent = { Text(text = stringResource(R.string.floating_window_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) }
+                        headlineContent = { Text(text = stringResource(R.string.floating_window_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.mobile_gear_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        }
                     )
                 },
                 {
                     ListItem(
-                        headlineContent = { FloatingWindowSwitch(battMonVM) }
+                        headlineContent = { FloatingWindowSwitch(battMonVM) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.pip_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        }
                     )
                 }
             )
@@ -105,6 +131,12 @@ fun BatteryMonitorContent(
                     ListItem(
                         headlineContent = {
                             Text(text = stringResource(R.string.disable_battery_optimization), style = MaterialTheme.typography.bodySmall)
+                        },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.info_24dp_000000_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
                         }
                     )
                 }
