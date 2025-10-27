@@ -15,7 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
-import androidx.compose.material3.Switch
+import com.dijia1124.plusplusbattery.ui.components.CustomSwitch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -83,7 +83,7 @@ fun SettingsContent(
                             )
                         },
                         trailingContent = {
-                            Switch(
+                            CustomSwitch(
                                 checked = followSystemTheme,
                                 onCheckedChange = { settingsVM.setFollowSystem(it) }
                             )
@@ -99,7 +99,7 @@ fun SettingsContent(
                             )
                         },
                         trailingContent = {
-                            Switch(
+                            CustomSwitch(
                                 checked = darkModeEnabled,
                                 onCheckedChange = { settingsVM.setDarkMode(it) },
                                 enabled = !followSystemTheme
@@ -111,7 +111,7 @@ fun SettingsContent(
                     ListItem(
                         headlineContent = { Text(text = stringResource(R.string.show_fab_on_dashboard), style = MaterialTheme.typography.bodyLarge) },
                         trailingContent = {
-                            Switch(
+                            CustomSwitch(
                                 checked = showOnDash,
                                 onCheckedChange = { batteryVM.setShowSwitchOnDashboard(it) }
                             )
@@ -130,7 +130,7 @@ fun SettingsContent(
                             Text(text = stringResource(R.string.automatic_daily_charge_cycle_log), style = MaterialTheme.typography.bodyLarge)
                         },
                         trailingContent = {
-                            Switch(
+                            CustomSwitch(
                                 checked = dailyHistoryEnabled,
                                 onCheckedChange = { settingsVM.setDailyHistoryEnabled(it, context) }
                             )
@@ -147,7 +147,7 @@ fun SettingsContent(
                     ListItem(
                         headlineContent = { Text(text = stringResource(R.string.enable_root_mode), style = MaterialTheme.typography.bodyLarge) },
                         trailingContent = {
-                            Switch(
+                            CustomSwitch(
                                 checked = isRootMode,
                                 onCheckedChange = { desired ->
                                     if (desired) {
@@ -169,7 +169,7 @@ fun SettingsContent(
                             Text(text = stringResource(R.string.enable_oplus_fields), style = MaterialTheme.typography.bodyLarge)
                         },
                         trailingContent = {
-                            Switch(
+                            CustomSwitch(
                                 checked = showOplusFields,
                                 onCheckedChange = { settingsVM.setShowOplusFields(it) }
                             )

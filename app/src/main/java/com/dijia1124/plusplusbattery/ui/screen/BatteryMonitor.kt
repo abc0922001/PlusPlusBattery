@@ -19,7 +19,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
+import com.dijia1124.plusplusbattery.ui.components.CustomSwitch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -136,7 +136,7 @@ fun FloatingWindowSwitch(battMonVM: BatteryMonitorSettingsViewModel) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = context.getString(R.string.show_in_floating_window), modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge)
-        Switch(
+        CustomSwitch(
             checked = isFloatingWindowOn,
             onCheckedChange = { on ->
                 if (on) {
@@ -181,7 +181,7 @@ fun BatteryMonitorSwitch(battMonVM: BatteryMonitorSettingsViewModel) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = context.getString(R.string.show_in_notification_bar), modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge)
-        Switch(
+        CustomSwitch(
             checked = isMonitoring,
             onCheckedChange = { on ->
                 if (on) {

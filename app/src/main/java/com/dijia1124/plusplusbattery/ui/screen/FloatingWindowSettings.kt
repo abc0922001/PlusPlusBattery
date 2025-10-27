@@ -18,7 +18,7 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Slider
-import androidx.compose.material3.Switch
+import com.dijia1124.plusplusbattery.ui.components.CustomSwitch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -202,7 +202,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         headlineContent = { Text(text = stringResource(R.string.text_stroke)) },
                         trailingContent = {
                             val textStrokeEnabled by floatingWindowSettingsViewModel.floatingWindowTextStrokeEnabled.collectAsState()
-                            Switch(
+                            CustomSwitch(
                                 checked = textStrokeEnabled,
                                 onCheckedChange = { floatingWindowSettingsViewModel.setFloatingWindowTextStrokeEnabled(it) }
                             )
@@ -214,7 +214,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         headlineContent = { Text(text = stringResource(R.string.text_shadow)) },
                         trailingContent = {
                             val textShadowEnabled by floatingWindowSettingsViewModel.floatingWindowTextShadowEnabled.collectAsState()
-                            Switch(
+                            CustomSwitch(
                                 checked = textShadowEnabled,
                                 onCheckedChange = { floatingWindowSettingsViewModel.setFloatingWindowTextShadowEnabled(it) }
                             )
@@ -231,7 +231,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                     ListItem(
                         headlineContent = { Text(text = stringResource(R.string.enable_touch)) },
                         trailingContent = {
-                            Switch(
+                            CustomSwitch(
                                 checked = touchable,
                                 onCheckedChange = { newTouchable ->
                                     floatingWindowSettingsViewModel.setFloatingWindowTouchable(newTouchable)
