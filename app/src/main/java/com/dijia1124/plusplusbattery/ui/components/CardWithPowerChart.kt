@@ -2,10 +2,13 @@ package com.dijia1124.plusplusbattery.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
@@ -28,6 +31,7 @@ data class PowerDataPoint(
     val temperature: Float = 0f
 )
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun CardWithPowerChart(
     info: BatteryInfo,
@@ -40,22 +44,37 @@ fun CardWithPowerChart(
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             NormalBatteryCard(info)
             Spacer(modifier = Modifier.weight(1f))
             if (isExpanded) {
-                IconButton(onClick = onResetData, modifier = Modifier.size(36.dp)) {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.refresh_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
-                        contentDescription = "Reset Chart Data"
-                    )
+                Box(modifier = Modifier.padding(horizontal = 4.dp)) {
+                    FilledTonalIconButton(
+                        onClick = onResetData,
+                        modifier = Modifier.size(36.dp),
+                        shapes = IconButtonDefaults.shapes()
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.refresh_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                            contentDescription = "Reset Chart Data"
+                        )
+                    }
                 }
             }
-            IconButton(onClick = onChartExpand, modifier = Modifier.size(36.dp)) {
-                Icon(
-                    imageVector = if (isExpanded) ImageVector.vectorResource(id = R.drawable.keyboard_arrow_up_24dp_1f1f1f_fill1_wght400_grad0_opsz24) else ImageVector.vectorResource(id = R.drawable.keyboard_arrow_down_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
-                    contentDescription = if (isExpanded) "Collapse" else "Expand"
-                )
+            Box(modifier = Modifier.padding(horizontal = 4.dp)) {
+                FilledTonalIconButton(
+                    onClick = onChartExpand,
+                    modifier = Modifier.size(36.dp),
+                    shapes = IconButtonDefaults.shapes()
+                ) {
+                    Icon(
+                        imageVector = if (isExpanded) ImageVector.vectorResource(id = R.drawable.keyboard_arrow_up_24dp_1f1f1f_fill1_wght400_grad0_opsz24) else ImageVector.vectorResource(
+                            id = R.drawable.keyboard_arrow_down_24dp_1f1f1f_fill1_wght400_grad0_opsz24
+                        ),
+                        contentDescription = if (isExpanded) "Collapse" else "Expand"
+                    )
+                }
             }
         }
         if (isExpanded) {

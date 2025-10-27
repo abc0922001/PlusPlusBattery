@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
@@ -40,11 +39,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -112,12 +113,13 @@ fun NormalBatteryCard(info: BatteryInfo) {
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun BatteryCardWithInfo(
     info: BatteryInfo,
     onShowInfo: () -> Unit
 ) {
-    Row {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -137,12 +139,19 @@ fun BatteryCardWithInfo(
                 overflow = TextOverflow.Ellipsis
             )
         }
-        IconButton(onClick = onShowInfo, modifier = Modifier.size(36.dp)) {
-            Icon(ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill1_wght400_grad0_opsz24), contentDescription = "Show Info", modifier = Modifier.size(18.dp))
+        Box(modifier = Modifier.padding(horizontal = 4.dp)) {
+            FilledTonalIconButton(
+                onClick = onShowInfo,
+                modifier = Modifier.size(36.dp),
+                shapes = IconButtonDefaults.shapes()
+            ) {
+                Icon(ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill1_wght400_grad0_opsz24), contentDescription = "Show Info", modifier = Modifier.size(18.dp))
+            }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun BatteryCardWithCalibration(
     info: BatteryInfo,
@@ -152,7 +161,7 @@ fun BatteryCardWithCalibration(
     onToggleDualBat: () -> Unit,
     onShowMultiplierDialog: () -> Unit
 ) {
-    Row {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Column(modifier = Modifier.padding(horizontal = 4.dp)) {
             Text(text = stringResource(id = info.type.titleRes), style = MaterialTheme.typography.bodyMedium)
             Text(text = info.value, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
@@ -160,12 +169,22 @@ fun BatteryCardWithCalibration(
         if (isRootMode) {
             Spacer(modifier = Modifier.weight(1f))
         }
-        IconButton(onClick = onShowMultiplierDialog, modifier = Modifier.size(36.dp)) {
-            Icon(ImageVector.vectorResource(id = R.drawable.edit_24dp_1f1f1f_fill1_wght400_grad0_opsz24), contentDescription = "Calibrate", modifier = Modifier.size(18.dp))
+        Box(modifier = Modifier.padding(horizontal = 4.dp)) {
+            FilledTonalIconButton(
+                onClick = onShowMultiplierDialog,
+                modifier = Modifier.size(36.dp),
+                shapes = IconButtonDefaults.shapes()
+            ) {
+                Icon(
+                    ImageVector.vectorResource(id = R.drawable.edit_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                    contentDescription = "Calibrate",
+                    modifier = Modifier.size(18.dp)
+                )
+            }
         }
         if (!isRootMode) {
             Spacer(modifier = Modifier.weight(1f))
-            Row {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Column {
                     Text(text = stringResource(R.string.dual_battery), style = MaterialTheme.typography.bodyMedium)
                     Text(
@@ -174,27 +193,48 @@ fun BatteryCardWithCalibration(
                         fontWeight = FontWeight.Bold
                     )
                 }
-                IconButton(onClick = onToggleDualBat, modifier = Modifier.size(36.dp)) {
-                    Icon(ImageVector.vectorResource(id = R.drawable.swap_horiz_24dp_1f1f1f_fill1_wght400_grad0_opsz24), contentDescription = "Toggle Dual Battery", modifier = Modifier.size(18.dp))
+                Box(modifier = Modifier.padding(horizontal = 4.dp)) {
+                    FilledTonalIconButton(
+                        onClick = onToggleDualBat,
+                        modifier = Modifier.size(36.dp),
+                        shapes = IconButtonDefaults.shapes()
+                    ) {
+                        Icon(
+                            ImageVector.vectorResource(id = R.drawable.swap_horiz_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                            contentDescription = "Toggle Dual Battery",
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
                 }
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun BatteryCardWithCoeffTable(
     info: BatteryInfo,
     onShowInfo: () -> Unit
 ) {
-    Row {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Column(modifier = Modifier.padding(horizontal = 4.dp)) {
             Text(text = stringResource(id = info.type.titleRes), style = MaterialTheme.typography.bodyMedium)
             Text(text = info.value, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
         }
         Spacer(modifier = Modifier.weight(1f))
-        IconButton(onClick = onShowInfo, modifier = Modifier.size(36.dp)) {
-            Icon(ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill1_wght400_grad0_opsz24), contentDescription = "Show TermCoeff Table", modifier = Modifier.size(18.dp))
+        Box(modifier = Modifier.padding(horizontal = 4.dp)) {
+            FilledTonalIconButton(
+                onClick = onShowInfo,
+                modifier = Modifier.size(36.dp),
+                shapes = IconButtonDefaults.shapes()
+            ) {
+                Icon(
+                    ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                    contentDescription = "Show TermCoeff Table",
+                    modifier = Modifier.size(18.dp)
+                )
+            }
         }
     }
 }
@@ -635,7 +675,7 @@ fun AddFieldDialog(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ManageEntriesDialog(
     viewModel: BatteryInfoViewModel,
@@ -756,15 +796,19 @@ fun ManageEntriesDialog(
                                 Text(entry.title, style = MaterialTheme.typography.bodyMedium)
                                 Text(entry.path, style = MaterialTheme.typography.bodySmall)
                             }
-                            IconButton(onClick = { entryEditing = entry }) {
+                            FilledTonalIconButton(
+                                onClick = { entryEditing = entry },
+                                shapes = IconButtonDefaults.shapes()
+                            ) {
                                 Icon(ImageVector.vectorResource(id = R.drawable.edit_24dp_1f1f1f_fill1_wght400_grad0_opsz24), "Edit")
                             }
-                            IconButton(
+                            FilledTonalIconButton(
                                 onClick = {
                                     coroutineScope.launch {
                                         viewModel.removeCustomEntry(entry.path)
                                     }
-                                }
+                                },
+                                shapes = IconButtonDefaults.shapes()
                             ) {
                                 Icon(ImageVector.vectorResource(id = R.drawable.delete_24dp_1f1f1f_fill1_wght400_grad0_opsz24), contentDescription = "Remove")
                             }
