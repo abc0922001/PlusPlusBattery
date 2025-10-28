@@ -1,6 +1,7 @@
 package com.dijia1124.plusplusbattery.ui.components
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,7 +30,11 @@ fun AppTopBar(title: String,
                 }
             }
         },
-        actions = actions,
+        actions = {
+            Row(Modifier.padding(horizontal = 8.dp)) {
+                actions()
+            }
+        },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer
         )

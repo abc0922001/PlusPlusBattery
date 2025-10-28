@@ -25,6 +25,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -51,13 +52,13 @@ fun History(historyInfoViewModel: HistoryInfoViewModel, currentTitle: String) {
     AppScaffold(
         title = currentTitle,
         actions = {
-            IconButton(onClick = { showExportDialog = true }) {
+            OutlinedIconButton(onClick = { showExportDialog = true }) {
                 Icon(
                     painter = androidx.compose.ui.res.painterResource(id = R.drawable.export_notes_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = "Export"
                 )
             }
-            IconButton(onClick = { showHelpDialog = true }) {
+            OutlinedIconButton(onClick = { showHelpDialog = true }) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = "Help"
