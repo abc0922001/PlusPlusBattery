@@ -7,8 +7,13 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -26,6 +31,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
@@ -45,6 +51,8 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.FloatingActionButtonDefaults.containerColor
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -66,11 +74,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -872,6 +880,7 @@ private fun collectPowerDataForChart(
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun ExpandableFab(
     hasRoot: Boolean,
@@ -881,12 +890,23 @@ fun ExpandableFab(
     onToggleRootMode: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var showMgr       by remember { mutableStateOf(false) }
+    var showMgr by remember { mutableStateOf(false) }
     var isExpanded by remember { mutableStateOf(false) }
-    val rotationAngle by animateFloatAsState(
-        targetValue = if (isExpanded) 45f else 0f,
-        animationSpec = tween(300),
-        label = "fab_rotation"
+
+    val fabContainerColor by animateColorAsState(
+        targetValue = if (isExpanded) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer,
+        animationSpec = MaterialTheme.motionScheme.fastEffectsSpec(),
+        label = "fab_container_color"
+    )
+    val fabContentColor by animateColorAsState(
+        targetValue = if (isExpanded) MaterialTheme.colorScheme.onPrimary else contentColorFor(MaterialTheme.colorScheme.secondaryContainer),
+        animationSpec = MaterialTheme.motionScheme.fastEffectsSpec(),
+        label = "fab_content_color"
+    )
+    val fabCornerRadius by animateDpAsState(
+        targetValue = if (isExpanded) 28.dp else 16.dp,
+        animationSpec = MaterialTheme.motionScheme.fastSpatialSpec(),
+        label = "fab_corner_radius"
     )
 
     if (isExpanded) {
@@ -904,37 +924,53 @@ fun ExpandableFab(
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.End,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        if (isExpanded) {
-            // Manage Entries Extended FAB
-            ExtendedFloatingActionButton(
-                onClick = {
-                    showMgr = true
-                    isExpanded = false
-                },
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = MaterialTheme.colorScheme.primary
+        AnimatedVisibility(
+            visible = isExpanded,
+            enter = expandHorizontally(
+                animationSpec = MaterialTheme.motionScheme.fastEffectsSpec()
+            ),
+            exit = fadeOut(
+                animationSpec = MaterialTheme.motionScheme.fastEffectsSpec()
+            )
+        ) {
+            Column(
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text(
-                    text = stringResource(R.string.manage_custom_entries)
-                )
-            }
-            // Root Mode Extended FAB
-            ExtendedFloatingActionButton(
-                onClick = {
-                    if (!isRootMode) {
-                        if (hasRoot) onToggleRootMode(true) else context.showRootDeniedToast()
-                    } else {
-                        onToggleRootMode(false)
+                ExtendedFloatingActionButton(
+                    onClick = {
+                        showMgr = true
+                        isExpanded = false
+                    },
+                    elevation = FloatingActionButtonDefaults.elevation(0.dp),
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    icon = { Icon(ImageVector.vectorResource(R.drawable.battery_profile_24dp_1f1f1f_fill0_wght400_grad0_opsz24), null) },
+                    text = {
+                        Text(
+                            text = stringResource(R.string.manage_custom_entries)
+                        )
                     }
-                    isExpanded = false
-                },
-                containerColor = if (isRootMode) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
-                contentColor = if (isRootMode) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary
-            ) {
-                Text(
-                    text = if (isRootMode) stringResource(R.string.disable_root_mode) else stringResource(R.string.enable_root_mode)
+                )
+                // Root Mode Extended FAB
+                ExtendedFloatingActionButton(
+                    onClick = {
+                        if (!isRootMode) {
+                            if (hasRoot) onToggleRootMode(true) else context.showRootDeniedToast()
+                        } else {
+                            onToggleRootMode(false)
+                        }
+                        isExpanded = false
+                    },
+                    elevation = FloatingActionButtonDefaults.elevation(0.dp),
+                    containerColor = if (isRootMode) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer,
+                    icon = { Icon(ImageVector.vectorResource(R.drawable.numbers_24dp_1f1f1f_fill0_wght400_grad0_opsz24), null) },
+                    text = {
+                        Text(
+                            text = if (isRootMode) stringResource(R.string.disable_root_mode) else stringResource(R.string.enable_root_mode)
+                        )
+                    }
                 )
             }
         }
@@ -942,14 +978,22 @@ fun ExpandableFab(
         // Main FAB
         FloatingActionButton(
             onClick = { isExpanded = !isExpanded },
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary,
+            shape = RoundedCornerShape(fabCornerRadius),
+            containerColor = fabContainerColor,
         ) {
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.build_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
-                contentDescription = if (isExpanded) "Close menu" else "Open menu",
-                modifier = Modifier.rotate(rotationAngle)
-            )
+            AnimatedContent(
+                targetState = isExpanded,
+                label = "fab_icon_content"
+            ) { expanded ->
+                Icon(
+                    imageVector = if (expanded) 
+                                    ImageVector.vectorResource(id = R.drawable.close_24dp_1f1f1f_fill0_wght400_grad0_opsz24) 
+                                else 
+                                    ImageVector.vectorResource(id = R.drawable.build_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                    contentDescription = if (expanded) "Close menu" else "Open menu",
+                    tint = fabContentColor
+                )
+            }
         }
 
         if (showMgr) {
