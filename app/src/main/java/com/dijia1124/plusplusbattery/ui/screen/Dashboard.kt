@@ -145,7 +145,7 @@ fun BatteryCardWithInfo(
                 modifier = Modifier.size(36.dp),
                 shapes = IconButtonDefaults.shapes()
             ) {
-                Icon(ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill1_wght400_grad0_opsz24), contentDescription = "Show Info", modifier = Modifier.size(18.dp))
+                Icon(ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill0_wght400_grad0_opsz24), contentDescription = "Show Info", modifier = Modifier.size(18.dp))
             }
         }
     }
@@ -176,7 +176,7 @@ fun BatteryCardWithCalibration(
                 shapes = IconButtonDefaults.shapes()
             ) {
                 Icon(
-                    ImageVector.vectorResource(id = R.drawable.edit_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                    ImageVector.vectorResource(id = R.drawable.edit_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = "Calibrate",
                     modifier = Modifier.size(18.dp)
                 )
@@ -200,7 +200,7 @@ fun BatteryCardWithCalibration(
                         shapes = IconButtonDefaults.shapes()
                     ) {
                         Icon(
-                            ImageVector.vectorResource(id = R.drawable.swap_horiz_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                            ImageVector.vectorResource(id = R.drawable.swap_horiz_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                             contentDescription = "Toggle Dual Battery",
                             modifier = Modifier.size(18.dp)
                         )
@@ -230,7 +230,7 @@ fun BatteryCardWithCoeffTable(
                 shapes = IconButtonDefaults.shapes()
             ) {
                 Icon(
-                    ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                    ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = "Show TermCoeff Table",
                     modifier = Modifier.size(18.dp)
                 )
@@ -800,7 +800,7 @@ fun ManageEntriesDialog(
                                 onClick = { entryEditing = entry },
                                 shapes = IconButtonDefaults.shapes()
                             ) {
-                                Icon(ImageVector.vectorResource(id = R.drawable.edit_24dp_1f1f1f_fill1_wght400_grad0_opsz24), "Edit")
+                                Icon(ImageVector.vectorResource(id = R.drawable.edit_24dp_1f1f1f_fill0_wght400_grad0_opsz24), "Edit")
                             }
                             FilledTonalIconButton(
                                 onClick = {
@@ -810,7 +810,7 @@ fun ManageEntriesDialog(
                                 },
                                 shapes = IconButtonDefaults.shapes()
                             ) {
-                                Icon(ImageVector.vectorResource(id = R.drawable.delete_24dp_1f1f1f_fill1_wght400_grad0_opsz24), contentDescription = "Remove")
+                                Icon(ImageVector.vectorResource(id = R.drawable.delete_24dp_1f1f1f_fill0_wght400_grad0_opsz24), contentDescription = "Remove")
                             }
                         }
                     }
@@ -946,7 +946,7 @@ fun ExpandableFab(
             contentColor = MaterialTheme.colorScheme.onPrimary,
         ) {
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.build_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                imageVector = ImageVector.vectorResource(id = R.drawable.build_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                 contentDescription = if (isExpanded) "Close menu" else "Open menu",
                 modifier = Modifier.rotate(rotationAngle)
             )

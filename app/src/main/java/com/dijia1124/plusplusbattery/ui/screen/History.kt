@@ -53,13 +53,13 @@ fun History(historyInfoViewModel: HistoryInfoViewModel, currentTitle: String) {
         actions = {
             IconButton(onClick = { showExportDialog = true }) {
                 Icon(
-                    painter = androidx.compose.ui.res.painterResource(id = R.drawable.export_notes_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                    painter = androidx.compose.ui.res.painterResource(id = R.drawable.export_notes_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = "Export"
                 )
             }
             IconButton(onClick = { showHelpDialog = true }) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = "Help"
                 )
             }

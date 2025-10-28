@@ -25,13 +25,13 @@ fun CustomSwitch(
         thumbContent = {
             if (checked) {
                 Icon(
-                    painter = painterResource(id = R.drawable.check_24dp_000000_fill1_wght400_grad0_opsz24),
+                    painter = painterResource(id = R.drawable.check_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = null,
                     modifier = Modifier.size(SwitchDefaults.IconSize),
                 )
             } else {
                 Icon(
-                    painter = painterResource(id = R.drawable.close_24dp_000000_fill1_wght400_grad0_opsz24),
+                    painter = painterResource(id = R.drawable.close_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = null,
                     modifier = Modifier.size(SwitchDefaults.IconSize),
                 )

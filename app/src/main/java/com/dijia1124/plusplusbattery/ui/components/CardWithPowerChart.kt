@@ -56,7 +56,7 @@ fun CardWithPowerChart(
                         shapes = IconButtonDefaults.shapes()
                     ) {
                         Icon(
-                            imageVector = ImageVector.vectorResource(id = R.drawable.refresh_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                            imageVector = ImageVector.vectorResource(id = R.drawable.refresh_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                             contentDescription = "Reset Chart Data"
                         )
                     }
@@ -69,8 +69,8 @@ fun CardWithPowerChart(
                     shapes = IconButtonDefaults.shapes()
                 ) {
                     Icon(
-                        imageVector = if (isExpanded) ImageVector.vectorResource(id = R.drawable.keyboard_arrow_up_24dp_1f1f1f_fill1_wght400_grad0_opsz24) else ImageVector.vectorResource(
-                            id = R.drawable.keyboard_arrow_down_24dp_1f1f1f_fill1_wght400_grad0_opsz24
+                        imageVector = if (isExpanded) ImageVector.vectorResource(id = R.drawable.keyboard_arrow_up_24dp_1f1f1f_fill0_wght400_grad0_opsz24) else ImageVector.vectorResource(
+                            id = R.drawable.keyboard_arrow_down_24dp_1f1f1f_fill0_wght400_grad0_opsz24
                         ),
                         contentDescription = if (isExpanded) "Collapse" else "Expand"
                     )

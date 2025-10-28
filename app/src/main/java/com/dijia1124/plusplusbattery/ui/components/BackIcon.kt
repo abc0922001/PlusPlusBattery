@@ -29,7 +29,7 @@ fun BackIcon(navController: NavController) {
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.arrow_back_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                imageVector = ImageVector.vectorResource(id = R.drawable.arrow_back_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                 contentDescription = "Back",
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
