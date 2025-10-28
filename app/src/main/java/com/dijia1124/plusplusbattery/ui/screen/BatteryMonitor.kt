@@ -69,7 +69,7 @@ fun BatteryMonitorContent(
                         headlineContent = { Text(text = stringResource(R.string.battery_monitor_entry_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.battery_profile_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.battery_profile_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         }
@@ -86,7 +86,7 @@ fun BatteryMonitorContent(
                         headlineContent = { BatteryMonitorSwitch(battMonVM) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.notifications_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.notifications_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         }
@@ -104,7 +104,7 @@ fun BatteryMonitorContent(
                         headlineContent = { Text(text = stringResource(R.string.floating_window_settings_list_item_title), style = MaterialTheme.typography.bodyLarge) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.mobile_gear_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.mobile_gear_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         }
@@ -115,7 +115,7 @@ fun BatteryMonitorContent(
                         headlineContent = { FloatingWindowSwitch(battMonVM) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.pip_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.pip_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         }
@@ -134,7 +134,7 @@ fun BatteryMonitorContent(
                         },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.info_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.info_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         }

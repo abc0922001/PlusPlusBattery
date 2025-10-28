@@ -91,7 +91,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         )) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.opacity_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.opacity_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -114,7 +114,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         )) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.resize_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.resize_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -132,7 +132,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                 {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
-                            painter = painterResource(id = R.drawable.format_color_fill_24dp_000000_fill0_wght400_grad0_opsz24),
+                            painter = painterResource(id = R.drawable.format_color_fill_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                             contentDescription = null,
                             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
@@ -179,7 +179,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                 {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
-                            painter = painterResource(id = R.drawable.format_color_text_24dp_000000_fill0_wght400_grad0_opsz24),
+                            painter = painterResource(id = R.drawable.format_color_text_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                             contentDescription = null,
                             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
@@ -222,7 +222,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         headlineContent = { Text(text = stringResource(R.string.font_weight, fontWeight)) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.format_bold_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.format_bold_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -243,7 +243,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         headlineContent = { Text(text = stringResource(R.string.text_stroke)) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.border_all_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.border_all_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -261,7 +261,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         headlineContent = { Text(text = stringResource(R.string.text_shadow)) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.shadow_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.shadow_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -285,7 +285,7 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
                         headlineContent = { Text(text = stringResource(R.string.enable_touch)) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.touch_app_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.touch_app_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },

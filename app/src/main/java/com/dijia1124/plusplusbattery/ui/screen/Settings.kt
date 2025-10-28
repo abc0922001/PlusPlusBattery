@@ -86,7 +86,7 @@ fun SettingsContent(
                         },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.palette_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.palette_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -108,7 +108,7 @@ fun SettingsContent(
                         },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.dark_mode_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.dark_mode_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -126,7 +126,7 @@ fun SettingsContent(
                         headlineContent = { Text(text = stringResource(R.string.show_fab_on_dashboard), style = MaterialTheme.typography.bodyLarge) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.picture_in_picture_alt_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.picture_in_picture_alt_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -151,7 +151,7 @@ fun SettingsContent(
                         },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.library_books_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.library_books_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -174,7 +174,7 @@ fun SettingsContent(
                         headlineContent = { Text(text = stringResource(R.string.enable_root_mode), style = MaterialTheme.typography.bodyLarge) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.numbers_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.numbers_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -202,7 +202,7 @@ fun SettingsContent(
                         },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.looks_one_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.looks_one_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         },
@@ -225,7 +225,7 @@ fun SettingsContent(
                         },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.battery_profile_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.battery_profile_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         }
@@ -249,7 +249,7 @@ fun SettingsContent(
                         headlineContent = { Text(text = stringResource(R.string.get_from_logcat), style = MaterialTheme.typography.bodyLarge) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.science_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.science_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         }
@@ -277,7 +277,7 @@ fun SettingsContent(
                         },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.update_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.update_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         }
@@ -289,7 +289,7 @@ fun SettingsContent(
                         headlineContent = { Text(text = stringResource(R.string.about), style = MaterialTheme.typography.bodyLarge) },
                         leadingContent = {
                             Icon(
-                                painter = painterResource(id = R.drawable.info_24dp_000000_fill0_wght400_grad0_opsz24),
+                                painter = painterResource(id = R.drawable.info_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                                 contentDescription = null,
                             )
                         }
@@ -340,7 +340,7 @@ fun RefreshIntervalListItem(
         },
         leadingContent = {
             Icon(
-                painter = painterResource(id = R.drawable.hourglass_bottom_24dp_000000_fill0_wght400_grad0_opsz24),
+                painter = painterResource(id = R.drawable.hourglass_bottom_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                 contentDescription = null,
             )
         },
