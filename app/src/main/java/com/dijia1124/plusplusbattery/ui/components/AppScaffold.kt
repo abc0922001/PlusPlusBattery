@@ -15,10 +15,11 @@ fun AppScaffold(
     title: String,
     navigationIcon: (@Composable () -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
+    isTopLevel: Boolean = false,
     content: @Composable () -> Unit
 ) {
     Scaffold(
-        topBar = { AppTopBar(title, navigationIcon, actions) },
+        topBar = { AppTopBar(title, navigationIcon, actions, isTopLevel) },
         containerColor = MaterialTheme.colorScheme.surfaceContainer,
         content = { innerPadding ->
             Column(

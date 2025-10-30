@@ -43,7 +43,7 @@ import kotlin.math.roundToInt
 
 @Composable
 fun Settings(currentTitle: String, navController: NavController, hasRoot: Boolean, batteryVM: BatteryInfoViewModel, settingsVM: SettingsViewModel) {
-    AppScaffold(currentTitle) {
+    AppScaffold(currentTitle, isTopLevel = true) {
         SettingsContent(navController, hasRoot, batteryVM, settingsVM)
     }
 }
