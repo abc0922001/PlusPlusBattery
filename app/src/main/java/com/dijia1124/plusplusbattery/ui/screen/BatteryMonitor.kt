@@ -130,7 +130,11 @@ fun BatteryMonitorContent(
                 {
                     ListItem(
                         headlineContent = {
-                            Text(text = stringResource(R.string.disable_battery_optimization), style = MaterialTheme.typography.bodySmall)
+                            Text(
+                                text = stringResource(R.string.disable_battery_optimization),
+                                style = MaterialTheme.typography.bodySmall,
+                                modifier = Modifier.padding(vertical = 8.dp)
+                            )
                         },
                         leadingContent = {
                             Icon(
