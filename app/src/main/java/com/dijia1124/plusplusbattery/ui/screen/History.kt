@@ -1,40 +1,39 @@
 package com.dijia1124.plusplusbattery.ui.screen
 
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import com.dijia1124.plusplusbattery.vm.HistoryInfoViewModel
 import com.dijia1124.plusplusbattery.R
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import com.dijia1124.plusplusbattery.ui.components.AppScaffold
+import com.dijia1124.plusplusbattery.ui.components.getListItemShape
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -52,16 +51,17 @@ fun History(historyInfoViewModel: HistoryInfoViewModel, currentTitle: String) {
 
     AppScaffold(
         title = currentTitle,
+        isTopLevel = true,
         actions = {
-            IconButton(onClick = { showExportDialog = true }) {
+            OutlinedIconButton(onClick = { showExportDialog = true }) {
                 Icon(
-                    painter = androidx.compose.ui.res.painterResource(id = R.drawable.export_notes_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+                    painter = androidx.compose.ui.res.painterResource(id = R.drawable.export_notes_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = "Export"
                 )
             }
-            IconButton(onClick = { showHelpDialog = true }) {
+            OutlinedIconButton(onClick = { showHelpDialog = true }) {
                 Icon(
-                    imageVector = Icons.Filled.Info,
+                    imageVector = ImageVector.vectorResource(id = R.drawable.info_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
                     contentDescription = "Help"
                 )
             }
@@ -134,22 +134,23 @@ fun History(historyInfoViewModel: HistoryInfoViewModel, currentTitle: String) {
 @Composable
 fun HistoryInfoScreen(historyInfoViewModel: HistoryInfoViewModel) {
     val historyInfos by historyInfoViewModel.allHistoryInfos.collectAsState(emptyList())
-    Column (modifier = Modifier.padding(horizontal = 16.dp)){
+    Column (modifier = Modifier.padding(horizontal = 8.dp)){
         LazyColumn {
             items(historyInfos.size) { index ->
 
-                OutlinedCard(
+                val cardShape = getListItemShape(index = index, size = historyInfos.size)
+
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 4.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
-                    shape = RoundedCornerShape(8.dp),
-                    border = BorderStroke(1.dp, Color.LightGray),
+                        .padding(vertical = 1.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    shape = cardShape
                 ) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(6.dp),
+                            .padding(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         val date = Date(historyInfos[historyInfos.size - index -1].date)

@@ -2,14 +2,13 @@ package com.dijia1124.plusplusbattery.ui.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
@@ -17,11 +16,14 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dijia1124.plusplusbattery.data.model.BatteryInfo
 import com.dijia1124.plusplusbattery.ui.screen.NormalBatteryCard
+import com.dijia1124.plusplusbattery.R
 
 data class PowerDataPoint(
     val timestamp: Long,
@@ -29,6 +31,7 @@ data class PowerDataPoint(
     val temperature: Float = 0f
 )
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun CardWithPowerChart(
     info: BatteryInfo,
@@ -41,22 +44,37 @@ fun CardWithPowerChart(
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             NormalBatteryCard(info)
             Spacer(modifier = Modifier.weight(1f))
             if (isExpanded) {
-                IconButton(onClick = onResetData, modifier = Modifier.size(36.dp)) {
-                    Icon(
-                        imageVector = Icons.Filled.Refresh,
-                        contentDescription = "Reset Chart Data"
-                    )
+                Box(modifier = Modifier.padding(horizontal = 4.dp)) {
+                    FilledTonalIconButton(
+                        onClick = onResetData,
+                        modifier = Modifier.size(36.dp),
+                        shapes = IconButtonDefaults.shapes()
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.refresh_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                            contentDescription = "Reset Chart Data"
+                        )
+                    }
                 }
             }
-            IconButton(onClick = onChartExpand, modifier = Modifier.size(36.dp)) {
-                Icon(
-                    imageVector = if (isExpanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
-                    contentDescription = if (isExpanded) "Collapse" else "Expand"
-                )
+            Box(modifier = Modifier.padding(horizontal = 4.dp)) {
+                FilledTonalIconButton(
+                    onClick = onChartExpand,
+                    modifier = Modifier.size(36.dp),
+                    shapes = IconButtonDefaults.shapes()
+                ) {
+                    Icon(
+                        imageVector = if (isExpanded) ImageVector.vectorResource(id = R.drawable.keyboard_arrow_up_24dp_1f1f1f_fill0_wght400_grad0_opsz24) else ImageVector.vectorResource(
+                            id = R.drawable.keyboard_arrow_down_24dp_1f1f1f_fill0_wght400_grad0_opsz24
+                        ),
+                        contentDescription = if (isExpanded) "Collapse" else "Expand"
+                    )
+                }
             }
         }
         if (isExpanded) {

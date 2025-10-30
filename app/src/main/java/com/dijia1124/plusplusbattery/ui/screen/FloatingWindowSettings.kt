@@ -1,11 +1,12 @@
 package com.dijia1124.plusplusbattery.ui.screen
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -13,22 +14,27 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Slider
-import androidx.compose.material3.Switch
+import com.dijia1124.plusplusbattery.ui.components.CustomSwitch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.dijia1124.plusplusbattery.R
 import com.dijia1124.plusplusbattery.ui.components.AppScaffold
 import com.dijia1124.plusplusbattery.ui.components.BackIcon
+import com.dijia1124.plusplusbattery.ui.components.CardGroup
+import com.dijia1124.plusplusbattery.ui.components.CardGroupTitle
 import com.dijia1124.plusplusbattery.vm.FloatingWindowSettingsViewModel
 
 @Composable
@@ -72,155 +78,234 @@ fun FloatingWindowSettingsContent(floatingWindowSettingsViewModel: FloatingWindo
         modifier = Modifier
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
+            .padding(horizontal = 8.dp)
     ) {
-        ListItem(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            headlineContent = { Text(text = stringResource(
-                R.string.opacity,
-                String.format("%.2f", alpha)
-            )) },
-            supportingContent = {
-                Slider(
-                    value = alpha,
-                    onValueChange = { newAlpha ->
-                        floatingWindowSettingsViewModel.setFloatingWindowAlpha(newAlpha)
-                    },
-                    valueRange = 0.0f..1.0f
-                )
-            }
-        )
-        ListItem(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            headlineContent = { Text(text = stringResource(
-                R.string.size,
-                String.format("%.2f", size)
-            )) },
-            supportingContent = {
-                Slider(
-                    value = size,
-                    onValueChange = { newSize ->
-                        floatingWindowSettingsViewModel.setFloatingWindowSize(newSize)
-                    },
-                    valueRange = 0.5f..2.0f
-                )
-            }
-        )
-        ListItem(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            headlineContent = { Text(text = stringResource(R.string.font_weight, fontWeight)) },
-            supportingContent = {
-                Slider(
-                    value = fontWeight.toFloat(),
-                    onValueChange = { newFontWeight ->
-                        floatingWindowSettingsViewModel.setFloatingWindowFontWeight(newFontWeight.toInt())
-                    },
-                    valueRange = 100f..900f,
-                    steps = 7
-                )
-            }
-        )
-        Text(
-            text = stringResource(R.string.text_color),
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(start = 26.dp, top = 16.dp, end = 26.dp, bottom = 8.dp)
-        )
-        LazyRow(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 26.dp)
-        ) {
-            items(textColorOptions.toList()) { (key, name) ->
-                val isSelected = key == textColorKey
-                OutlinedCard(
-                    onClick = { floatingWindowSettingsViewModel.setFloatingWindowTextColor(key) },
-                    border = if (isSelected) BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else CardDefaults.outlinedCardBorder(),
-                    colors = if (isSelected) CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer) else CardDefaults.outlinedCardColors(),
-                ) {
-                    Text(
-                        text = name,
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+        CardGroup(
+            title = { CardGroupTitle(text = stringResource(R.string.general)) },
+            content = listOf(
+                {
+                    ListItem(
+                        headlineContent = { Text(text = stringResource(
+                            R.string.opacity,
+                            String.format("%.2f", alpha)
+                        )) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.opacity_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
+                        supportingContent = {
+                            Slider(
+                                value = alpha,
+                                onValueChange = { newAlpha ->
+                                    floatingWindowSettingsViewModel.setFloatingWindowAlpha(newAlpha)
+                                },
+                                valueRange = 0.0f..1.0f
+                            )
+                        }
                     )
-                }
-            }
-        }
-        Text(
-            text = stringResource(R.string.background_color),
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(start = 26.dp, top = 16.dp, end = 26.dp, bottom = 8.dp)
-        )
-        LazyRow(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 26.dp)
-        ) {
-            items(backgroundColorOptions.toList()) { (key, name) ->
-                val isSelected = key == backgroundColorKey
-                OutlinedCard(
-                    onClick = { floatingWindowSettingsViewModel.setFloatingWindowBackgroundColor(key) },
-                    border = if (isSelected) BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else CardDefaults.outlinedCardBorder(),
-                    colors = if (isSelected) CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer) else CardDefaults.outlinedCardColors(),
-                ) {
-                    Text(
-                        text = name,
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+                },
+                {
+                    ListItem(
+                        headlineContent = { Text(text = stringResource(
+                            R.string.size,
+                            String.format("%.2f", size)
+                        )) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.resize_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
+                        supportingContent = {
+                            Slider(
+                                value = size,
+                                onValueChange = { newSize ->
+                                    floatingWindowSettingsViewModel.setFloatingWindowSize(newSize)
+                                },
+                                valueRange = 0.5f..2.0f
+                            )
+                        }
                     )
-                }
-            }
-        }
-        ListItem(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            headlineContent = { Text(text = stringResource(R.string.text_stroke)) },
-            trailingContent = {
-                val textStrokeEnabled by floatingWindowSettingsViewModel.floatingWindowTextStrokeEnabled.collectAsState()
-                Switch(
-                    checked = textStrokeEnabled,
-                    onCheckedChange = { floatingWindowSettingsViewModel.setFloatingWindowTextStrokeEnabled(it) }
-                )
-            }
-        )
-        ListItem(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            headlineContent = { Text(text = stringResource(R.string.text_shadow)) },
-            trailingContent = {
-                val textShadowEnabled by floatingWindowSettingsViewModel.floatingWindowTextShadowEnabled.collectAsState()
-                Switch(
-                    checked = textShadowEnabled,
-                    onCheckedChange = { floatingWindowSettingsViewModel.setFloatingWindowTextShadowEnabled(it) }
-                )
-            }
-        )
-        ListItem(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            headlineContent = { Text(text = stringResource(R.string.enable_touch)) },
-            trailingContent = {
-                Switch(
-                    checked = touchable,
-                    onCheckedChange = { newTouchable ->
-                        floatingWindowSettingsViewModel.setFloatingWindowTouchable(newTouchable)
-                    }
-                )
-            }
-        )
-        ListItem(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            headlineContent = {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Button(
-                        modifier = Modifier.fillMaxWidth(),
-                        onClick = { floatingWindowSettingsViewModel.resetFloatingWindowSettings() }) {
-                        Text(text = stringResource(R.string.reset))
+                },
+                {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.format_color_fill_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                            contentDescription = null,
+                            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Column {
+                            Text(
+                                text = stringResource(R.string.background_color),
+                                style = MaterialTheme.typography.bodyLarge,
+                                modifier = Modifier.padding(vertical = 12.dp)
+                            )
+                            LazyRow(
+                                modifier = Modifier
+                                    .padding(bottom = 16.dp)
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                contentPadding = PaddingValues(end = 16.dp)
+                            ) {
+                                items(backgroundColorOptions.toList()) { (key, name) ->
+                                    val isSelected = key == backgroundColorKey
+                                    OutlinedCard(
+                                        onClick = { floatingWindowSettingsViewModel.setFloatingWindowBackgroundColor(key) },
+                                        border = CardDefaults.outlinedCardBorder(),
+                                        colors = CardDefaults.cardColors(
+                                            containerColor = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+                                            contentColor = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary
+                                        ),
+                                    ) {
+                                        Text(
+                                            text = name,
+                                            modifier = Modifier.padding(16.dp),
+                                        )
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-            }
+            )
         )
+        Spacer(modifier = Modifier.height(16.dp))
+        CardGroup(
+            title = { CardGroupTitle(text = stringResource(R.string.text)) },
+            content = listOf(
+                {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.format_color_text_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                            contentDescription = null,
+                            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Column {
+                            Text(
+                                text = stringResource(R.string.text_color),
+                                style = MaterialTheme.typography.bodyLarge,
+                                modifier = Modifier.padding(vertical = 12.dp)
+                            )
+                            LazyRow(
+                                modifier = Modifier
+                                    .padding(bottom = 16.dp)
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                contentPadding = PaddingValues(end = 16.dp)
+                            ) {
+                                items(textColorOptions.toList()) { (key, name) ->
+                                    val isSelected = key == textColorKey
+                                    OutlinedCard(
+                                        onClick = { floatingWindowSettingsViewModel.setFloatingWindowTextColor(key) },
+                                        border = CardDefaults.outlinedCardBorder(),
+                                        colors = CardDefaults.cardColors(
+                                            containerColor = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+                                            contentColor = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary
+                                        ),
+                                    ) {
+                                        Text(
+                                            text = name,
+                                            modifier = Modifier.padding(16.dp)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    ListItem(
+                        headlineContent = { Text(text = stringResource(R.string.font_weight, fontWeight)) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.format_bold_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
+                        supportingContent = {
+                            Slider(
+                                value = fontWeight.toFloat(),
+                                onValueChange = { newFontWeight ->
+                                    floatingWindowSettingsViewModel.setFloatingWindowFontWeight(newFontWeight.toInt())
+                                },
+                                valueRange = 100f..900f,
+                                steps = 7
+                            )
+                        }
+                    )
+                },
+                {
+                    ListItem(
+                        headlineContent = { Text(text = stringResource(R.string.text_stroke)) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.border_all_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
+                        trailingContent = {
+                            val textStrokeEnabled by floatingWindowSettingsViewModel.floatingWindowTextStrokeEnabled.collectAsState()
+                            CustomSwitch(
+                                checked = textStrokeEnabled,
+                                onCheckedChange = { floatingWindowSettingsViewModel.setFloatingWindowTextStrokeEnabled(it) }
+                            )
+                        }
+                    )
+                },
+                {
+                    ListItem(
+                        headlineContent = { Text(text = stringResource(R.string.text_shadow)) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.shadow_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
+                        trailingContent = {
+                            val textShadowEnabled by floatingWindowSettingsViewModel.floatingWindowTextShadowEnabled.collectAsState()
+                            CustomSwitch(
+                                checked = textShadowEnabled,
+                                onCheckedChange = { floatingWindowSettingsViewModel.setFloatingWindowTextShadowEnabled(it) }
+                            )
+                        }
+                    )
+                }
+            )
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        CardGroup(
+            title = { CardGroupTitle(text = stringResource(R.string.interaction))},
+            content = listOf(
+                {
+                    ListItem(
+                        headlineContent = { Text(text = stringResource(R.string.enable_touch)) },
+                        leadingContent = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.touch_app_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+                                contentDescription = null,
+                            )
+                        },
+                        trailingContent = {
+                            CustomSwitch(
+                                checked = touchable,
+                                onCheckedChange = { newTouchable ->
+                                    floatingWindowSettingsViewModel.setFloatingWindowTouchable(newTouchable)
+                                }
+                            )
+                        }
+                    )
+                }
+            )
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = { floatingWindowSettingsViewModel.resetFloatingWindowSettings() }) {
+            Text(text = stringResource(R.string.reset))
+        }
     }
 }

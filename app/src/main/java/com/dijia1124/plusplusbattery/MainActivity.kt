@@ -11,10 +11,8 @@ import androidx.compose.ui.Modifier
 import com.dijia1124.plusplusbattery.ui.theme.PlusPlusBatteryTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -132,6 +130,7 @@ class MainActivity : ComponentActivity() {
                 val currentRoute = navBackStackEntry?.destination?.route
                 val hasRoot by settingsViewModel.hasRoot.collectAsState()
                 Scaffold(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
                     // Only show the top bar when on a top-level screen
                     bottomBar = {
                         if (currentRoute in topLevelRoutes) {
@@ -210,30 +209,47 @@ class MainActivity : ComponentActivity() {
 fun BottomNavigationBar(navController: NavController) {
     // Define the list of navigation routes using the data class
     val navRoutes = listOf(
-        NavRoute("dashboard", Icons.Filled.Home, stringResource(R.string.nav_dashboard)),
+        NavRoute(
+            "dashboard",
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.home_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.home_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+            label = stringResource(R.string.nav_dashboard)
+        ),
         NavRoute(
             "battery_monitor",
-            ImageVector.vectorResource(id = R.drawable.speed_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
-            stringResource(R.string.monitor)
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.speed_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.speed_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+            label = stringResource(R.string.monitor)
         ),
         NavRoute(
             "history",
-            ImageVector.vectorResource(id = R.drawable.library_books_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
-            stringResource(R.string.nav_history)
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.library_books_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.library_books_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+            label = stringResource(R.string.nav_history)
         ),
-        NavRoute("settings", Icons.Filled.Settings, stringResource(R.string.settings)),
+        NavRoute(
+            "settings",
+            selectedIcon = ImageVector.vectorResource(id = R.drawable.settings_24dp_1f1f1f_fill1_wght400_grad0_opsz24),
+            unselectedIcon = ImageVector.vectorResource(id = R.drawable.settings_24dp_1f1f1f_fill0_wght400_grad0_opsz24),
+            label = stringResource(R.string.settings)
+        ),
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     NavigationBar()
     {
         navRoutes.forEach { navRoute ->
+            val selected = currentDestination?.route == navRoute.route
             NavigationBarItem(
                 alwaysShowLabel = false,
-                icon = { Icon(navRoute.icon, contentDescription =
-                    navRoute.label) },
+                icon = {
+                    Icon(
+                        imageVector = if (selected) navRoute.selectedIcon else navRoute.unselectedIcon,
+                        contentDescription = navRoute.label
+                    )
+                },
                 label = { Text(navRoute.label) },
-                selected = currentDestination?.route == navRoute.route,
+                selected = selected,
                 onClick = {
                     navController.navigate(navRoute.route) {
                         popUpTo(navController.graph.findStartDestination().id) {

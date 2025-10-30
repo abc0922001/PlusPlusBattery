@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,10 +15,12 @@ fun AppScaffold(
     title: String,
     navigationIcon: (@Composable () -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
+    isTopLevel: Boolean = false,
     content: @Composable () -> Unit
 ) {
     Scaffold(
-        topBar = { AppTopBar(title, navigationIcon, actions) },
+        topBar = { AppTopBar(title, navigationIcon, actions, isTopLevel) },
+        containerColor = MaterialTheme.colorScheme.surfaceContainer,
         content = { innerPadding ->
             Column(
                 modifier = Modifier.padding(top = innerPadding.calculateTopPadding())
