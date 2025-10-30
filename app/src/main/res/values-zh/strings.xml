@@ -35,7 +35,7 @@
     <string name="battery_current">电流</string>
     <string name="full_charge_capacity">完全充满时的容量</string>
     <string name="estimated_fcc_title">电池容量估算</string>
-    <string name="estimated_fcc_info">此值在电量完全充满（100%）且电流小于25 mA 时进行估算。此时的charge counter的值会被记录并且显示于此。 \n注意上方电流倍率和单双电芯选项需要选择正确。</string>
+    <string name="estimated_fcc_info">此值在电量完全充满（100%）且电流小于25 mA 时进行估算。此时的charge counter的值会被记录并且显示于此。 \n注意上方电流倍率和单双电芯选项需要选择正确。\n\n另外，这个功能不需要app常驻后台，理论上它只需要你充满电的那一瞬间。</string>
     <string name="estimating_full_charge_capacity">正在测量完全充满时的容量…</string>
     <string name="capacity_unavailable">无法读取容量</string>
     <string name="charging">充电中</string>
@@ -153,5 +153,14 @@
     <string name="text_stroke">文本描边</string>
     <string name="export_history">导出历史信息</string>
     <string name="export_history_confirmation">导出所有历史信息到一个 csv 文件？ \n最早: %1$s\n最新: %2$s</string>
-    <string name="export">Export</string>
+    <string name="export">导出</string>
+    <string name="general">通用</string>
+    <string name="notification">通知</string>
+    <string name="floating_window">悬浮窗</string>
+    <string name="tips">提示</string>
+    <string name="ui">用户界面</string>
+    <string name="root">Root</string>
+    <string name="other">其他</string>
+    <string name="text">文本</string>
+    <string name="interaction">交互</string>
 </resources>
