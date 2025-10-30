@@ -51,6 +51,7 @@ fun History(historyInfoViewModel: HistoryInfoViewModel, currentTitle: String) {
 
     AppScaffold(
         title = currentTitle,
+        isTopLevel = true,
         actions = {
             OutlinedIconButton(onClick = { showExportDialog = true }) {
                 Icon(

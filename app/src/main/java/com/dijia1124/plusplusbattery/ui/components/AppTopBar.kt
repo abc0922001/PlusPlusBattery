@@ -17,10 +17,13 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun AppTopBar(title: String,
               navigationIcon: (@Composable () -> Unit)? = null,
-              actions: @Composable RowScope.() -> Unit = {},) {
+              actions: @Composable RowScope.() -> Unit = {},
+              isTopLevel: Boolean = false) {
     TopAppBar(
         title = {
-            Text(text = title, style = MaterialTheme.typography.headlineSmall)
+            Text(
+                text = title,
+                style = if (isTopLevel) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.titleMedium)
         },
         navigationIcon = {
             // only show the navigation icon if it's not null

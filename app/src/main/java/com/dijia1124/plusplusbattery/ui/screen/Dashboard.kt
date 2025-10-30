@@ -102,7 +102,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Dashboard(hasRoot: Boolean, currentTitle: String, batteryInfoViewModel: BatteryInfoViewModel, settingsViewModel: SettingsViewModel) {
-    AppScaffold(title = currentTitle)
+    AppScaffold(title = currentTitle, isTopLevel = true)
     {
         DashBoardContent(hasRoot, batteryInfoViewModel, settingsViewModel)
     }

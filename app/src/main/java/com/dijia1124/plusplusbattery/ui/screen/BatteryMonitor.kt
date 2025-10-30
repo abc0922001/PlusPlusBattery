@@ -42,7 +42,7 @@ import com.dijia1124.plusplusbattery.vm.BatteryMonitorSettingsViewModel
 
 @Composable
 fun BatteryMonitor(currentTitle: String, navController: NavController, battMonVM: BatteryMonitorSettingsViewModel) {
-    AppScaffold(currentTitle) {
+    AppScaffold(currentTitle, isTopLevel = true) {
         BatteryMonitorContent(navController, battMonVM)
     }
 }
